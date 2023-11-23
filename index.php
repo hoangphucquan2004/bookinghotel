@@ -14,7 +14,18 @@ if(isset($_GET['act']) && ($_GET['act'])){
             }
             include "./view/booking.php";
             break;
-        
+        // case 'book':
+        //     if(isset($_GET['idphong']) && ($_GET['idphong']>0)){
+        //         $phong = load_one_phong($_GET['idphong']);
+        //     }
+        //     include "./view/booking.php";
+        //     break;
+        case 'ttcanhan':
+            if(isset($_GET['idphong']) && ($_GET['idphong']>0)){
+                $phong = load_one_phong($_GET['idphong']);
+            }
+            include "./view/thongtincanhan.php";
+            break;        
         default:
         include "./view/header.php";
         include "./view/home.php";
