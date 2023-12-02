@@ -85,9 +85,9 @@ a:hover{
 	font-size: 14px;
 	text-transform: uppercase;
 }
-.mainmenu .nav.navbar-nav {
+/* .mainmenu .nav.navbar-nav {
   float: left;
-}
+} */
 .emergency_number {
   background: #fe5d5d none repeat scroll 0 0;
   float: left;
@@ -1263,6 +1263,7 @@ body#booking_page .booking_done_area .room_cost table td span.total_pain_info{
 	color: #88d54f;
 }
 body#booking_page .booking_next_btn {
+	
  	width: 100%;
 }
 body#booking_page .booking_info_area .facilities_name .star i.fa-star{
@@ -1826,6 +1827,18 @@ body#single_blog_page .recent_post_details > p {
 22.					Start Preloader CSS
 -----------------------------------------------------------*/
 
+.btnCart {
+	background : darkred;
+	color: #fff;
+	padding: 10px 12px;
+	border: 1px solid darkred;
+	border-radius:5px;
+	margin-top: 10px;
+	cursor: pointer;
+	float: right;
+	
+  }
+  
 #loader-wrapper .logo {
   position: absolute;
   top: 48%;
@@ -1920,7 +1933,9 @@ body#single_blog_page .recent_post_details > p {
 	margin-top: 60px;
 }
 
-
+.thanhtoan{
+	text-align: center
+}
 /* --------------------------------------------------------
 					End Preloader CSS
 -----------------------------------------------------------*/

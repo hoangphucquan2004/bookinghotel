@@ -13,8 +13,11 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
                 $email=$_POST['email'];
                 $pass=$_POST['pass'];
                 insert_nguoidung($name,$sdt,$email,$pass);
+                // header('Location : view/taikhoan/dangnhap.php');
                 $thongbao="Đã đăng ký thành công. Vui lòng đăng nhập!"; 
+                header('location:dkdn.php?act=dangnhap');
             }
+            
             include "view/taikhoan/dangky.php";
             break;
 

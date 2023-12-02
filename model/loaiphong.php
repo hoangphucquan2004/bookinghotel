@@ -1,7 +1,7 @@
 <?php 
 // Thêm mới
-    function insert_loaiphong($name,$trangThai){
-        $sql="insert into loaiphong (name,trangThai) values('$name','$trangThai')";
+    function insert_loaiphong($name){
+        $sql="insert into loaiphong (name) values('$name')";
         pdo_execute($sql);
     }
 // Xóa

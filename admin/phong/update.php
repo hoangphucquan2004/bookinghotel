@@ -10,9 +10,32 @@ if (is_file($hinhpath)) {
 }
 
 ?>
-<div class="row">
+
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h3 class="page-title">Cập nhật phòng</h3>
+                <div class="ml-auto text-right">
+                    <!-- <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+    <div class="row">
     <div class="row formtitle">
-        <h1>Cập nhật phòng</h1>
+       
     </div>
     <div class="row formcontent">
         <form action="./index.php?act=updatephong" enctype="multipart/form-data" method="post">
@@ -37,13 +60,7 @@ if (is_file($hinhpath)) {
                 Giá <br>
                 <input type="text" name="giaphong" value="<?= $giaPhong ?>">
             </div>
-            <div class="row mb10">
-                Trạng thái <br>
-                <select name="trangthai">
-                    <option value="Còn phòng">Còn phòng</option>
-                    <option value="Hết phòng">Hết phòng</option>
-                </select>
-            </div>
+            
             <div class="row mb10">
                 Hình ảnh <br>
                 <input type="file" name="hinh">
@@ -71,4 +88,5 @@ if (is_file($hinhpath)) {
         </form>
     </div>
 </div>
+    </div>
 </div>

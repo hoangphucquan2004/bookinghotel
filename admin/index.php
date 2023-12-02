@@ -1,11 +1,10 @@
 <?php
-// include "../model/loaiphong.php";
 include "../model/taikhoan.php";
 include "../model/pdo.php";
 include "../model/phong.php";
 include "../model/loaiphong.php";
-include "./header.php";
-
+include "header.php";
+include "aside.php";
 if (isset($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
@@ -13,25 +12,20 @@ if (isset($_GET['act'])) {
             //  Caaph nhật danh mục
             if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
                 $name = $_POST['name'];
-                $trangThai = $_POST['trangThai'];
-                insert_loaiphong($name, $trangThai);
+                insert_loaiphong($name);
                 $thongbao = "Thêm thành công";
             }
             include "loaiphong/add.php";
             break;
-            // Xóa
-            // Sửa
         case 'suadm':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $loaiphong = loadone_loaiphong($_GET['id']);
             }
             include "loaiphong/update.php";
             break;
-            //Cập nhật
         case 'updatedm':
             if (isset($_POST['capnhat']) && ($_POST['capnhat'])) {
                 $name = $_POST['name'];
-                $trangThai = $_POST['trangThai'];
                 $id = $_POST['id'];
                 update_loaiphong($id, $name, $trangThai);
                 $thongbao = "Cập nhật thành công";
@@ -52,8 +46,7 @@ if (isset($_GET['act'])) {
 
             if (isset($_POST['themmoi']) && ($_POST['themmoi'])) {
                 $tenloai = $_POST['tenloai'];
-                $trangthai = $_POST['trangthai'];
-                insert_loaiphong($tenloai, $trangthai);
+                insert_loaiphong($tenloai);
             }
             include "./loaiphong/add.php";
             break;
@@ -62,7 +55,6 @@ if (isset($_GET['act'])) {
                 // $maphong = $_POST['maphong'];
                 $tenphong = $_POST['tenphong'];
                 $giaphong = $_POST['giaphong'];
-                $trangthai = $_POST['trangthai'];
                 $hinh = $_FILES['hinh']['name'];
                 $target_dir = "../upload/";
                 $target_file = $target_dir . basename($_FILES['hinh']['name']);
@@ -73,7 +65,7 @@ if (isset($_GET['act'])) {
                 }
                 $mota = $_POST['mota'];
                 $idloaiphong = $_POST['idloaiphong'];
-                $sql =  insert_phong($tenphong, $giaphong, $trangthai, $hinh, $mota, $idloaiphong);
+                $sql =  insert_phong($tenphong, $giaphong, $hinh, $mota, $idloaiphong);
             }
             include "./phong/add.php";
             break;
@@ -91,7 +83,6 @@ if (isset($_GET['act'])) {
             if (isset($_POST['capnhat']) && $_POST['capnhat']) {
                 $tenphong = $_POST['tenphong'];
                 $giaphong = $_POST['giaphong'];
-                $trangthai = $_POST['trangthai'];
                 $hinh = $_FILES['hinh']['name'];
                 $target_dir = "../upload/";
                 $target_file = $target_dir . basename($_FILES["hinh"]["name"]);
@@ -99,7 +90,7 @@ if (isset($_GET['act'])) {
                 $mota = $_POST['mota'];
                 $idloaiphong = $_POST['idloaiphong'];
                 $id = $_POST['id'];
-                update_phong($id, $tenphong, $giaphong, $trangthai, $hinh, $mota, $idloaiphong);
+                update_phong($id, $tenphong, $giaphong, $hinh, $mota, $idloaiphong);
             }
             $listphong = load_all_phong();
             include "./phong/listphong.php";
@@ -123,12 +114,17 @@ if (isset($_GET['act'])) {
             $listnguoidung = loadall_nguoidung("", 0);
             include "./taikhoan/list.php";
             break;
+        // default:
+        // include "./home.php";
+        // break;
     }
-} else {
-    include './home.php';
 }
+// } else {
+//     include "./home.php";
+// }
+
+include "home.php";
+include "footer.php";
 
 
-
-
-include "./footer.php";
+?>

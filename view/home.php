@@ -4,7 +4,7 @@
         <div class="hotel_booking_area">
             <div class="container">
                 <div class="hotel_booking">
-                    <form id="form1" role="form" action="#" class="">
+                    <form id="form1" role="form" action="index.php?act=timphong" method="post">
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <div class="room_book border-right-dark-1">
                                 <h6>Book Your</h6>
@@ -13,14 +13,14 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-2">
                             <div class="input-group border-bottom-dark-2">
-                                <input class="date-picker" id="datepicker" placeholder="Ngày đến" type="text" />
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="" id="datepicker" placeholder="Tên phòng" type="text" name="keyw"/>
+                                <!-- <div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-2">
                             <div class="input-group border-bottom-dark-2">
-                                <input class="date-picker" id="datepicker1" placeholder="Ngày đi" type="text" />
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                <input class="" id="datepicker1" placeholder="Giá phòng" type="number" name="giaphong" />
+                                <!-- <div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -56,7 +56,8 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <a class="btn btn-primary floatright">Book</a>
+                                    <!-- <a class="btn btn-primary floatright">Book</a> -->
+                                    <input type="submit" class="btn btn-primary floatright" value="Book" name="timphong">
                                 </div>
                             </div>
                         </div>
@@ -134,6 +135,8 @@
                                     <div class="left_room_title floatright">
                                         <a href="'.$link_booking.'" class="btn">Book</a>
                                     </div>
+                                    
+                                    
                                 </div>
                             </figure>
                         </div>
