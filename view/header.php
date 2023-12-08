@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="style.css" />
     <!-- responsive -->
     <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -50,15 +51,15 @@
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
 
-        <style>
-    #totalProduct {
-      color: #fff;
-      background-color: red;
-      font-size: 12px;
-      padding: 5px;
-      border-radius: 50%;
-    }
-  </style>
+    <style>
+        #totalProduct {
+            color: #fff;
+            background-color: red;
+            font-size: 12px;
+            padding: 5px;
+            border-radius: 50%;
+        }
+    </style>
 
 </head>
 
@@ -91,7 +92,7 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <div class="site_logo fix">
-                                    <a id="brand" class="clearfix navbar-brand border-right-whitesmoke" href="index.php"><img src="img/logoncq.jpg" alt="Trips" width="70px" height="70px"></a>
+                                    <a id="brand" class="clearfix navbar-brand border-right-whitesmoke" href="index.php"><img src="img/site-logo.png" alt="Trips" ></a>
                                     <div class="header_login floatleft">
                                         <ul>
                                             <?php
@@ -119,14 +120,12 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <li role="presentation" class="dropdown">
-                                        <a id="drop-one" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                            Trang chủ
-                                        </a>
-                                    </li>
+
+                                    <li><a href="index.php">Trang chủ</a></li>
                                     <li><a href="index.php?act=choo">Chỗ ở</a></li>
-                                   
-                                    <li role="presentation" class="dropdown">
+                                    <li><a href="index.php">Đặc trưng</a></li>
+
+                                    <!-- <li role="presentation" class="dropdown">
                                         <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
                                             Đặc trưng
                                         </a>
@@ -137,21 +136,17 @@
                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="staff.html">Our Staff</a></li>
                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="404.html">404 Page</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li><a href="blog.html">Tin tức</a></li>
 
                                     <li role="presentation" class="dropdown">
-                                            <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
-                                           
-                                        </li>
-                                       
-                                        
+                                        <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
+                                    </li>
                                     <li role="presentation" class="dropdown">
-                                    
                                         <span id="totalProduct"><?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>
                                     </li>
                                 </ul>
-                                
+
                             </div><!-- /.navbar-collapse -->
                         </nav>
                     </div>

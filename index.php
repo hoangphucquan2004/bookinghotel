@@ -4,7 +4,6 @@ include "model/pdo.php";
 include "model/phong.php";
 include "model/taikhoan.php";
 include "model/order.php";
-
 include "./global.php";
 $phongnew  = load_all_phong_home();
 
@@ -12,16 +11,60 @@ if (isset($_GET['act']) && ($_GET['act'])) {
     $act = $_GET['act'];
     switch ($act) {
         case 'choo':
+            $phongnew  = load_all_phong_home();
             include "./view/choo.php";
             break;
         case 'booking':
             if (isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
-                $phong = load_one_phong($_GET['idphong']);
+                if (!isset($_SESSION['name'])) {
+                    echo "<input type ='hidden' value = 'a'>";
+                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>";
+                    echo "<script>
+                            Swal.fire({
+                                title: 'Thông báo',
+                                text: 'VUi lòng đăng nhập để đặt phòng',
+                                confirmButtonText: 'OK'
+                            });
+                          </script>";
+                }
+               
             }
+                $phong = load_one_phong($_GET['idphong']);
             include "./view/booking.php";
             break;
+        case 'xacnhantt':
+            $phong = load_one_phong($_GET['idphong']);
+            include "./view/datphong.php";
+            break;
         case 'datphong':
+            $namekh = $email = "";
+            $error_namekh = $error_email = "";
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (empty($_POST["namekh"])) {
+                    $error_namekh = "<span style='color:red;'>Error: Họ tên bắt buộc phải nhập.</span>";
+                } else {
+                    $namekh = $_POST["namekh"];
+                    if (!preg_match("/^[a-zA-Z ]*$/", $namekh)) {
+                        $error_namekh = "<span style='color:red;'>Error: Họ tên chỉ chấp nhận chữ và khoảng trắng.</span>";
+                    } else {
+                        echo $namekh;
+                    }
+                }
+
+                if (empty($_POST["email"])) {
+                    $error_email = "<span style='color:red;'>Error: Email bắt buộc phải nhập.</span>";
+                } else {
+                    $email = $_POST["email"];
+                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                        $error_email = "<span style='color:red;'>Error: Email nhập chưa đúng.</span>";
+                    } else {
+                        echo $email;
+                    }
+                }
+            }
+
             if (isset($_POST['datphong']) && ($_POST['datphong'])) {
+                $tong = $_SESSION['tong'];
                 $idphong = $_POST['idphong'];
                 $namekh = $_POST['namekh'];
                 $phonenumber = $_POST['phonenumber'];
@@ -30,12 +73,73 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 $songuoi = $_POST['songuoi'];
                 $ngaybatdau = $_POST['ngaybatdau'];
                 $ngayketthuc = $_POST['ngayketthuc'];
-                // echo $namekh,$idphong,$hoadon,$ngaybatdau,$ngayketthuc,$songuoi;
                 dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi);
                 $thongbao = "Đặt phòng thành công!";
+                $phong = load_one_phong($_POST['idphong']);
+                include "./view/datphong.php";
             }
-            $phong = load_one_phong($_POST['idphong']);
-            include "./view/datphong.php";
+
+            if (isset($_POST['redirect'])) {
+                $tong = $_SESSION['tong'];
+                $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+                $vnp_Returnurl = "http://localhost/php/du_an_one/index.php";
+                $vnp_TmnCode = "CGXZLS0Z"; //Mã website tại VNPAY 
+                $vnp_HashSecret = "XNBCJFAKAZQSGTARRLGCHVZWCIOIGSHN"; //Chuỗi bí mật
+                $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+                $vnp_OrderInfo = 'Noi dung thanh toan';
+                $vnp_OrderType = 'billpayment';
+                $vnp_Amount = $tong * 100;
+                $vnp_Locale = 'vn';
+                $vnp_BankCode = 'NCB';
+                $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+                $inputData = array(
+                    "vnp_Version" => "2.1.0",
+                    "vnp_TmnCode" => $vnp_TmnCode,
+                    "vnp_Amount" => $vnp_Amount,
+                    "vnp_Command" => "pay",
+                    "vnp_CreateDate" => date('YmdHis'),
+                    "vnp_CurrCode" => "VND",
+                    "vnp_IpAddr" => $vnp_IpAddr,
+                    "vnp_Locale" => $vnp_Locale,
+                    "vnp_OrderInfo" => $vnp_OrderInfo,
+                    "vnp_OrderType" => $vnp_OrderType,
+                    "vnp_ReturnUrl" => $vnp_Returnurl,
+                    "vnp_TxnRef" => $vnp_TxnRef
+                );
+
+                if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                    $inputData['vnp_BankCode'] = $vnp_BankCode;
+                }
+                ksort($inputData);
+                $query = "";
+                $i = 0;
+                $hashdata = "";
+                foreach ($inputData as $key => $value) {
+                    if ($i == 1) {
+                        $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                    } else {
+                        $hashdata .= urlencode($key) . "=" . urlencode($value);
+                        $i = 1;
+                    }
+                    $query .= urlencode($key) . "=" . urlencode($value) . '&';
+                }
+
+                $vnp_Url = $vnp_Url . "?" . $query;
+                if (isset($vnp_HashSecret)) {
+                    $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+                    $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+                }
+                $returnData = array(
+                    'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+                );
+                if (isset($_POST['redirect'])) {
+                    header('Location: ' . $vnp_Url);
+                    die();
+                } else {
+                    echo json_encode($returnData);
+                }
+            }
             break;
         case 'timphong':
             if (isset($_POST['timphong']) && $_POST['timphong']) {
@@ -48,10 +152,7 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             $listphong = search_phong($keyw, $giaphong);
             include "./view/timphong.php";
             break;
-        case 'xacnhantt':
-            $phong = load_one_phong($_GET['idphong']);
-            include "./view/datphong.php";
-            break;
+
         case 'thanhtoan':
             $phong = load_one_phong($_GET['idphong']);
             include "./view/thanhtoan.php";
@@ -95,8 +196,6 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                     $txtemail = $_POST['txtemail'];
 
                     $pttt = $_POST['pttt'];
-                    // date_default_timezone_set('Asia/Ho_Chi_Minh');
-                    // $currentDateTime = date('Y-m-d H:i:s');
                     if (isset($_SESSION['user'])) {
                         $id_user = $_SESSION['user']['id'];
                     } else {
@@ -115,9 +214,81 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 header("Location: index.php?act=listCart");
             }
             break;
+        case 'ttonl':
+            if (isset($_POST['order_confirm']) && ($_POST['order_confirm'])) {
+                $pttt = $_POST['pttt'];
+                $txthoten = $_POST['txthoten'];
+                $txttel = $_POST['txttel'];
+                $txtemail = $_POST['txtemail'];
+                if ($pttt == 2) {
+                    $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+                    $vnp_Returnurl = "http://localhost/php/du_an_one/index.php";
+                    $vnp_TmnCode = "CGXZLS0Z"; //Mã website tại VNPAY 
+                    $vnp_HashSecret = "XNBCJFAKAZQSGTARRLGCHVZWCIOIGSHN"; //Chuỗi bí mật
+
+                    $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+                    $vnp_OrderInfo = 'Noi dung thanh toan';
+                    $vnp_OrderType = 'billpayment';
+                    $vnp_Amount = 1000000 * 100;
+                    $vnp_Locale = 'vn';
+                    $vnp_BankCode = 'NCB';
+                    $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+
+                    $inputData = array(
+                        "vnp_Version" => "2.1.0",
+                        "vnp_TmnCode" => $vnp_TmnCode,
+                        "vnp_Amount" => $vnp_Amount,
+                        "vnp_Command" => "pay",
+                        "vnp_CreateDate" => date('YmdHis'),
+                        "vnp_CurrCode" => "VND",
+                        "vnp_IpAddr" => $vnp_IpAddr,
+                        "vnp_Locale" => $vnp_Locale,
+                        "vnp_OrderInfo" => $vnp_OrderInfo,
+                        "vnp_OrderType" => $vnp_OrderType,
+                        "vnp_ReturnUrl" => $vnp_Returnurl,
+                        "vnp_TxnRef" => $vnp_TxnRef
+                    );
+
+                    if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                        $inputData['vnp_BankCode'] = $vnp_BankCode;
+                    }
+                    ksort($inputData);
+                    $query = "";
+                    $i = 0;
+                    $hashdata = "";
+                    foreach ($inputData as $key => $value) {
+                        if ($i == 1) {
+                            $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                        } else {
+                            $hashdata .= urlencode($key) . "=" . urlencode($value);
+                            $i = 1;
+                        }
+                        $query .= urlencode($key) . "=" . urlencode($value) . '&';
+                    }
+
+                    $vnp_Url = $vnp_Url . "?" . $query;
+                    if (isset($vnp_HashSecret)) {
+                        $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret); //  
+                        $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+                    }
+                    $returnData = array(
+                        'code' => '00', 'message' => 'success', 'data' => $vnp_Url
+                    );
+                    if (isset($_POST['order_confirm'])) {
+                        header('Location: ' . $vnp_Url);
+                        die();
+                    } else {
+                        echo json_encode($returnData);
+                    }
+                }
+            }
+
+
+            break;
         default:
             include "./view/header.php";
             include "./view/home.php";
+
             include "./view/footer.php";
     }
 } else {

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include "model/taikhoan.php";
 include "model/pdo.php";
 if((isset($_GET['act']))&&($_GET['act']!="")){
@@ -13,14 +12,11 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
                 $email=$_POST['email'];
                 $pass=$_POST['pass'];
                 insert_nguoidung($name,$sdt,$email,$pass);
-                // header('Location : view/taikhoan/dangnhap.php');
                 $thongbao="Đã đăng ký thành công. Vui lòng đăng nhập!"; 
                 header('location:dkdn.php?act=dangnhap');
             }
-            
             include "view/taikhoan/dangky.php";
             break;
-
         case 'dangnhap':
             if(isset($_POST['dangnhap'])&&($_POST['dangnhap'])){
                 $name=$_POST['name'];
@@ -36,14 +32,9 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
             }
             include "view/taikhoan/dangnhap.php";
             break;
-
-
         default:
                 include "view/home.php";
                 break;
-            
         }
     } 
-    
-
 ?>

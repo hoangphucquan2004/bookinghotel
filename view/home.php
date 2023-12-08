@@ -13,7 +13,7 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-2">
                             <div class="input-group border-bottom-dark-2">
-                                <input class="" id="datepicker" placeholder="Tên phòng" type="text" name="keyw"/>
+                                <input class="" id="datepicker" placeholder="Tên phòng" type="text" name="keyw" />
                                 <!-- <div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
@@ -78,26 +78,26 @@
                     <li data-transition="random" data-slotamount="7" data-masterspeed="1000">
                         <img src="img/rev-slider/slider-one.jpg" alt="slide">
                         <div class="tp-caption large_black sfr" data-x="105" data-y="197" data-speed="1200" data-start="1100" data-easing="easeInOutBack" style="font-family: 'Playfair Display', serif; font-size: 48px;color: #131e2a; margin-bottom: 23px; text-transform: uppercase; line-height: 40px;">
-                            A brand New Hotel
+                            Một khách sạn hoàn toàn mới
                         </div>
                         <div class="tp-caption large_black sfr" data-x="105" data-y="255" data-speed="1500" data-start="1400" data-easing="easeInOutBack" style="font-family: 'Playfair Display', serif; font-size: 48px;color: #131e2a; margin-bottom: 23px; text-transform: uppercase; line-height: 40px;">
-                            Beyond Ordinary
+                            Ngoài tầm thường
                         </div>
                         <div class="tp-caption lfb carousel-caption-inner" data-x="105" data-y="313" data-speed="1300" data-start="1700" data-easing="easeInOutBack" style="background: #f7c411; padding: 10px; cursor: pointer;">
-                            <a href="#" class="" style="background: #f7c411; border-radius: 0; color: #313a45; display: inline-block;  font-size: 18px; padding: 8px 34px; text-transform: uppercase; border: 1px solid #9e811a;">Explore IT</a>
+                            <a href="#" class="" style="background: #f7c411; border-radius: 0; color: #313a45; display: inline-block;  font-size: 18px; padding: 8px 34px; text-transform: uppercase; border: 1px solid #9e811a;">Khám phá</a>
                         </div>
                     </li>
 
                     <li data-transition="random" data-slotamount="7" data-masterspeed="1000">
                         <img src="img/rev-slider/slider-one.jpg" alt="slide">
                         <div class="tp-caption large_black sfr" data-x="105" data-y="197" data-speed="1200" data-start="1100" data-easing="easeInOutBack" style="font-family: 'Playfair Display', serif; font-size: 48px;color: #131e2a; margin-bottom: 23px; text-transform: uppercase; line-height: 40px;">
-                            Book Your Summer Holidays
+                            Đặt kì nghỉ hè của bạn
                         </div>
                         <div class="tp-caption large_black sfr" data-x="105" data-y="255" data-speed="1500" data-start="1400" data-easing="easeInOutBack" style="font-family: 'Playfair Display', serif; font-size: 48px;color: #131e2a; margin-bottom: 23px; text-transform: uppercase; line-height: 40px;">
-                            With HOTEL BOOKING Template
+                            Với khách sạn NCQ
                         </div>
                         <div class="tp-caption lfb carousel-caption-inner" data-x="105" data-y="313" data-speed="1300" data-start="1700" data-easing="easeInOutBack" style="background: #f7c411; padding: 10px; cursor: pointer;">
-                            <a href="#" class="" style="background: #f7c411; border-radius: 0; color: #313a45; display: inline-block;  font-size: 18px; padding: 8px 34px; text-transform: uppercase; border: 1px solid #9e811a;">Explore IT</a>
+                            <a href="#" class="" style="background: #f7c411; border-radius: 0; color: #313a45; display: inline-block;  font-size: 18px; padding: 8px 34px; text-transform: uppercase; border: 1px solid #9e811a;">Khám phá</a>
                         </div>
                     </li>
                 </ul>
@@ -115,11 +115,12 @@
                 <h3>Chào mừng bạn đến với khách sạn NCQ</h3>
             </div>
             <div class="row">
+               
                 <?php
                 foreach ($phongnew as $phong) {
                     extract($phong);
                     $hinh = $img_path . $img;
-                    $link_booking = "index.php?act=booking&idphong=".$phong['id'];
+                    $link_booking = "index.php?act=booking&idphong=" . $phong['id'];
                     echo '
                         <div class="col-lg-3 col-md-3 col-sm-3">
                         <div class="single_room_wrapper clearfix">
@@ -130,13 +131,11 @@
                                 <div class="room_title border-bottom-whitesmoke clearfix">
                                     <div class="left_room_title floatleft">
                                         <h6>' . $name . '</h6>
-                                        <p>' . $giaPhong . 'đ/ <span?>night</span></p>
+                                        <p>' . $giaPhong . 'đ/ <span?>đêm</span></p>
                                     </div>
                                     <div class="left_room_title floatright">
-                                        <a href="'.$link_booking.'" class="btn">Book</a>
+                                        <a href="' . $link_booking . '" class="btn" name ="bookphong" id="bookphong" onclick"func()">Book</a>
                                     </div>
-                                    
-                                    
                                 </div>
                             </figure>
                         </div>
@@ -144,9 +143,14 @@
                         ';
                 }
                 ?>
+              
+         
             </div>
         </div>
     </div>
+
+
+
 </section>
 <!-- end welcome section -->
 
@@ -532,3 +536,35 @@
     </div>
 </section>
 <!-- end contact us area -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script> --> -->
+<!-- <script>
+  document.getElementById('bookphong').addEventListener('click', (event) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "Vui lòng đăng nhập để book phòng",
+      showClass: {
+        popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+      },
+      hideClass: {
+        popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+      }
+    });
+  });
+</script>   -->
+<?php
+if (!isset($_SESSION['name'])) {
+    echo '<script>
+        function myFunction() {
+            document.getElementById("bookphong").innerHTML = "Hello World";
+          }
+        </script>';
+}
+?>

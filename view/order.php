@@ -13,7 +13,7 @@
         <body>
 <div class="page-order">
     <div class="form-order">
-        <form action="" method="post">
+        <form action="index.php?act=ttonl" method="post">
             <h2>Thông tin khách hàng</h2>
             <div><input type="text" name="txthoten" id="" placeholder="Họ và tên" required></div>
             <div><input type="tel" name="txttel" id="" placeholder="Số điện thoại" required></div>
@@ -22,7 +22,7 @@
             <h3>Phương thức thanh toán</h3>
             <p><input type="radio" name="pttt" id="" value="1" required> Thanh toán khi giao hàng</p>
             <p><input type="radio" name="pttt" id="" value="2" required> Chuyển khoản ngân hàng</p>
-            <input type="submit" value="Xác nhận đặt hàng" name="order_confirm">
+            <input type="submit"  value="Xác nhận đặt hàng" name="order_confirm">
         </form>
     </div>
     <div class="sub-order">

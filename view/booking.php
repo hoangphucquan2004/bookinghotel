@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,41 +71,6 @@
         <header class="header_area">
 
             <!-- start header top -->
-            <div class="header_top_area">
-                <div class="container">
-                    <div class="row">
-                        <div class="header_top clearfix">
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-                                <div class="left_header_top">
-                                    <ul>
-                                        <li><a href="#"><img src="img/temp-icon.png" alt="temp-icon">London dc, GR 17°C</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 floatright">
-                                <div class="right_header_top clearfix floatright">
-                                    <ul class="nav navbar-nav navbar-right">
-                                        <li class="">
-                                            <a class="border-right-dark-4" href="#">login</a>
-                                        </li>
-                                        <li role="presentation" class="dropdown">
-                                            <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                                register
-                                                <span class="caret"></span>
-                                            </a>
-                                            <!-- <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-                                            </ul> -->
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- end header top  -->
 
             <!-- start main header -->
@@ -206,7 +172,6 @@
                 <div class="booking">
                     <div role="tabpanel">
                         <h3 style="color: #3ac4fa;  text-align: center;">Chi tiết phòng khách sạn <? $name ?></h3>
-
                         <?php
                         extract($phong);
                         $hinh = $img_path . $img;
@@ -341,23 +306,22 @@
                                                                                 </span></td>
                                                                         </tr>
                                                                     </table>
+                                                                    <?php
+                                                                    $_SESSION['tong'] = $tong;
+                                                                    ?>
                                                                     <form action="">
                                                                         <div class="items">
                                                                             <button data-id="<?= $id ?>" class="btn btn-warning btn-sm floatright" onclick="addToCart(<?= $id ?>, '<?= $name ?>', <?= $giaPhong ?>)">Thêm vào giỏ hàng</button>
                                                                         </div>
                                                                     </form>
+
                                                                     <div class="col-lg-12 col-md-12">
                                                                         <div class="booking_next_btn padding-top-30 margin-top-20 clearfix border-top-whitesmoke">
-                                                                            <a href="index.php?act=xacnhantt&idphong=<?= $phong['id'] ?>" class="btn btn-warning btn-sm floatright">Đặt Phòng Ngay</a>
+                                                                            <a href="index.php?act=xacnhantt&idphong=<?= $phong['id'] ?>&tong=<?= $tong ?>" class="btn btn-warning btn-sm floatright">Đặt Phòng Ngay</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
-
-
-
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -386,19 +350,19 @@
                 <div class="contact_us clearfix">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="call clearfix">
-                            <h6>Call Us</h6>
-                            <p>123 456 7890</p>
+                            <h6>Liên hệ</h6>
+                            <p>0365 133 833</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="email_us clearfix">
-                            <h6>Email us</h6>
-                            <p>info@hotelbooking.com</p>
+                            <h6>Email liên hệ</h6>
+                            <p>ncq@hotelbooking.com</p>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="news_letter clearfix">
-                            <input type="text" placeholder="Enter ID  for News Letter">
+                            <input type="text" placeholder="Nhập ID cho Thư Tin Tức">
                             <a href="#" class="btn btn-blue">go</a>
                         </div>
                     </div>
@@ -426,12 +390,12 @@
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="footer_widget">
                                 <div class="footer_logo">
-                                    <a id="brand" class="clearfix navbar-brand border-right-whitesmoke" href="index.php"><img src="img/logoncq.jpg" alt="Trips" width="70px" height="70px"></a>
+                                    <a href="#"><img src="img/footer-logo-one.png" alt=""></a>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, conser adipiscing elit. In consectetur tincidunt dolor.</p>
+                                <p>Xin chân thành cảm ơn quý khách hàng vì đã tin tưởng và lựa chọn dịch vụ của chúng tôi. Chúng tôi rất trân trọng sự ủng hộ của quý khách.</p>
                                 <ul>
                                     <li>
-                                        <P><i class="fa fa-map-marker"></i>St Amsterdam finland, <br> United Stats of AKY16 8PN</P>
+                                        <P><i class="fa fa-map-marker"></i>Tòa nhà FPT, <br> Trịnh Văn Bô, Nam Từ Liêm, Hà Nội.</P>
                                     </li>
                                 </ul>
                             </div>
@@ -439,21 +403,21 @@
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="row">
                                 <div class="footer_widget clearfix">
-                                    <h5 class="padding-left-15">Quick Links</h5>
+                                    <h5 class="padding-left-15">Đường dẫn nhanh</h5>
                                     <div class="col-lg-6 col-md-6 col-sm-6">
                                         <ul>
-                                            <li><a href="#">Rooms</a></li>
-                                            <li><a href="#">Food & Drinks</a></li>
-                                            <li><a href="#">Beach Venues</a></li>
-                                            <li><a href="#">Amenities</a></li>
+                                            <li><a href="#">Phòng</a></li>
+                                            <li><a href="#">Đồ uống & Thực phẩm</a></li>
+                                            <li><a href="#">Địa điểm bãi biển</a></li>
+                                            <li><a href="#">Tiện Nghi</a></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6 sol-sm-6">
                                         <ul>
-                                            <li><a href="#">Noordwijk</a></li>
-                                            <li><a href="#">Wellness</a></li>
-                                            <li><a href="#">Manifesto</a></li>
-                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Đặc trưng</a></li>
+                                            <li><a href="#">Sức khỏe</a></li>
+                                            <li><a href="#">Tin tức</a></li>
+                                            <li><a href="#">Liên hệ</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -461,9 +425,9 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
                             <div class="footer_widget">
-                                <h5>We Are Global</h5>
+                                <h5>Chúng tôi toàn cầu</h5>
                                 <div class="footer_map">
-                                    <a href="#"><img src="img/footer-map-two.jpg" alt="img"></a>
+                                    <a href="#"><img src="img/footer-map-two.jpg" alt=""></a>
                                 </div>
                             </div>
                         </div>
@@ -471,7 +435,7 @@
                     <div class="row">
                         <div class="container">
                             <div class="footer_copyright margin-tb-50 content-center">
-                                <p>© 2015 <a href="#">Hotelbooking</a>. All rights reserved</p>
+                                <p>© 2015 <a href="#">Đặt phòng khách sạn</a>. Đã đăng ký bản quyền</p>
                             </div>
                         </div>
                     </div>
@@ -528,7 +492,6 @@
     </main>
 </body>
 
-<!-- Mirrored from demoxml.com/html/hotelbooking/booking.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 16 Nov 2023 12:18:20 GMT -->
 
 </html>
 
