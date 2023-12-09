@@ -168,11 +168,9 @@
                     ?>
                     <!-- Tab panes -->
                     <div class="tab-content">
-
                         <div role="tabpanel" id="personal_info">
                             <div class="personal_info_area">
                                 <div class="hotel_booking_area">
-                                    <!-- <h3>Xác nhận thông tin đặt phòng </h3> -->
                                     <div class="hotel_booking margin-top-70 margin-bottom-125">
                                         <form role="form" action="index.php?act=datphong" method="post">
                                             <div class="row">
@@ -181,17 +179,17 @@
                                                         <input type="hidden" name="idphong" class="form-control" value="<?= $phong['id'] ?>">
                                                     </div>
                                                     <div class="input-group">
-                                                        <input type="text" name="namekh" class="form-control" placeholder="Họ và Tên">
+                                                        Họ và Tên<input type="text" name="namekh" class="form-control" value="<?= $_SESSION['name']['name'] ?>" placeholder="Họ và Tên">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 icon_arrow">
                                                     <div class="input-group">
-                                                        <input type="phonenumber" name="phonenumber" class="form-control" placeholder="Số điện thoại">
+                                                        Số điện thoại<input type="phonenumber" name="phonenumber" class="form-control" value="<?= $_SESSION['name']['sdt'] ?>" placeholder="Số điện thoại">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-4 col-md-4 col-sm-4 icon_arrow">
                                                     <div class="input-group">
-                                                        <input type="email" name="email" class="form-control" placeholder="Email">
+                                                        Email <input type="email" name="email" class="form-control" value="<?= $_SESSION['name']['email'] ?>" placeholder="Email">
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,12 +206,12 @@
                                             <div class="row">
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
                                                     <div class="input-group">
-                                                        Ngày nhận phòng<input type="date" id="dateInput" name="ngaybatdau" onchange="validateDate() class=" form-control">
+                                                        Ngày nhận phòng<input type="date" id="dateInput" name="ngaybatdau" onchange="validateDate()" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
                                                     <div class="input-group">
-                                                        Ngày trả phòng<input type="date" id="dateInput" name="ngayketthuc" onchange="validateDate() class=" form-control">
+                                                        Ngày trả phòng<input type="date" id="dateInput" name="ngayketthuc" onchange="validateDate()" class=" form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
@@ -225,7 +223,7 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <div class="booking_next_btn padding-top-30 margin-top-50 clearfix border-top-whitesmoke">
                                                         <input type="submit" name="redirect" class="btn btn-warning btn-sm " value="Thanh toán online">
-                                                        <input type="submit" name="datphong" class="btn btn-warning btn-sm floatright" value="Đặt phòng" onclick="confirm('Xác nhận đặt phòng')">
+                                                        <input type="submit" name="datphong" class="btn btn-warning btn-sm floatright" value="Xác nhận đặt " onclick="confirm('Bạn đã đặt phòng thành công!Vui lòng xem phòng ở lịch sử đặt')">
                                                         <input type="hidden" name="idphong" value="<?= $phong['id'] ?>">
                                                     </div>
                                                 </div>
@@ -252,38 +250,38 @@
 
     <!-- start contact us area -->
     <section class=" contact_us_area content-left">
-                                                        <div class="container">
-                                                            <div class="contact_us clearfix">
-                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                    <div class="call clearfix">
-                                                                        <h6>Liên hệ</h6>
-                                                                        <p>0365 133 833</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                    <div class="email_us clearfix">
-                                                                        <h6>Email liên hệ</h6>
-                                                                        <p>ncq@hotelbooking.com</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                    <div class="news_letter clearfix">
-                                                                        <input type="text" placeholder="Nhập ID cho Thư Tin Tức">
-                                                                        <a href="#" class="btn btn-blue">go</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                                    <div class="social_icons clearfix">
-                                                                        <ul>
-                                                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+        <div class="container">
+            <div class="contact_us clearfix">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="call clearfix">
+                        <h6>Liên hệ</h6>
+                        <p>0365 133 833</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="email_us clearfix">
+                        <h6>Email liên hệ</h6>
+                        <p>ncq@hotelbooking.com</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="news_letter clearfix">
+                        <input type="text" placeholder="Nhập ID cho Thư Tin Tức">
+                        <a href="#" class="btn btn-blue">go</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                    <div class="social_icons clearfix">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- end contact us area -->
 

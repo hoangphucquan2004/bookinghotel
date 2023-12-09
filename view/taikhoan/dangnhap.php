@@ -30,7 +30,6 @@
         </form>
         <h2 class="thongbao">
                             <?php
-
                                 if(isset($thongbao)&&($thongbao!="")){
                                     echo $thongbao;
                                 }

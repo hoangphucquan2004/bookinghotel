@@ -115,18 +115,19 @@
                 <h3>Chào mừng bạn đến với khách sạn NCQ</h3>
             </div>
             <div class="row">
-               
+
                 <?php
                 foreach ($phongnew as $phong) {
                     extract($phong);
                     $hinh = $img_path . $img;
                     $link_booking = "index.php?act=booking&idphong=" . $phong['id'];
                     echo '
-                        <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div id = "bookphong" name = "bookphong">
+                        <div class="col-lg-3 col-md-3 col-sm-3" >
                         <div class="single_room_wrapper clearfix">
-                            <figure class="uk-overlay uk-overlay-hover">
+                            <figure class="uk-overlay uk-overlay-hover" >
                                 <div class="room_media">
-                                    <a href="#"><img src="' . $hinh . '" ></a>
+                                    <a href="' . $link_booking . '"><img src="' . $hinh . '" ></a>
                                 </div>
                                 <div class="room_title border-bottom-whitesmoke clearfix">
                                     <div class="left_room_title floatleft">
@@ -134,17 +135,18 @@
                                         <p>' . $giaPhong . 'đ/ <span?>đêm</span></p>
                                     </div>
                                     <div class="left_room_title floatright">
-                                        <a href="' . $link_booking . '" class="btn" name ="bookphong" id="bookphong" onclick"func()">Book</a>
+                                        <a href="' . $link_booking . '" class="btn" name ="bookphong" id="" onclick"func()">Book</a>
                                     </div>
                                 </div>
                             </figure>
                         </div>
                     </div>
+                    </div>
                         ';
                 }
                 ?>
-              
-         
+
+
             </div>
         </div>
     </div>
@@ -536,35 +538,53 @@
     </div>
 </section>
 <!-- end contact us area -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script> --> -->
-<!-- <script>
-  document.getElementById('bookphong').addEventListener('click', (event) => {
-    event.preventDefault();
-    Swal.fire({
-      title: "Vui lòng đăng nhập để book phòng",
-      showClass: {
-        popup: `
+<?php
+if (!isset($_SESSION['name'])) {
+    echo 'aa';
+}
+?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js"></script>
+<script>
+    document.getElementById('bookphong').addEventListener('click', (event) => {
+        event.preventDefault();
+        Swal.fire({
+            title: "Vui lòng đăng nhập để đặt phòng",
+            showClass: {
+                popup: `
       animate__animated
-      animate__fadeInUp
+      animate__fadeInUp 
       animate__faster
     `
-      },
-      hideClass: {
-        popup: `
+            },
+            hideClass: {
+                popup: `
       animate__animated
       animate__fadeOutDown
       animate__faster
     `
-      }
+            }
+        });
     });
-  });
-</script>   -->
-<?php
-if (!isset($_SESSION['name'])) {
-    echo '<script>
-        function myFunction() {
-            document.getElementById("bookphong").innerHTML = "Hello World";
-          }
-        </script>';
-}
-?>
+</script>
+<!-- <script>
+    document.getElementsByName('bookphong').addEventListener('click', (event) => {
+        event.preventDefault();
+        Swal.fire({
+            title: "Vui lòng đăng nhập để đặt phòng",
+            showClass: {
+                popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+            },
+            hideClass: {
+                popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+            }
+        });
+    });
+</script> -->

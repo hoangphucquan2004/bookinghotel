@@ -55,4 +55,10 @@ function loadone_phongCart ($idList) {
     return $sanpham;
 }
 
+function load_lichsu() {
+   $sql = "SELECT phong.name,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc FROM phong inner join datphong on phong.id = datphong.idPhong
+--    inner join nguoidung on datphong.iduser=nguoidung.id";
+   $lichsu = pdo_query($sql);
+   return $lichsu;
+}
 ?>

@@ -4,6 +4,11 @@
         $listnguoidung=pdo_query($sql);
         return $listnguoidung;
     }
+    // function loadtk_đh($name){
+    //     $sql="select * from nguoidung where name = $name";
+    //     $nguoidung=pdo_query_one($sql);
+    //     return $nguoidung;
+    // }
 
     function insert_nguoidung($name,$sdt,$email,$pass){
     $sql="insert into nguoidung(name,sdt,email,pass) values('$name','$sdt','$email','$pass')";
@@ -28,6 +33,9 @@
     function dalete_nguoidung($id){
         $sql="delete from nguoidung where id=".$id;
         pdo_execute($sql);
+    }
+    function loadone_nguoidung(){
+        // $sql = "SELECT * FROM nguoidung where "
     }
 
 ?>  

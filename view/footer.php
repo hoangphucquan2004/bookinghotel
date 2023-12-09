@@ -59,8 +59,33 @@
      </div>
  </footer>
  <!-- end footer -->
+ <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js
+"></script>
+ <!-- <script>
+  document.getElementById('bookphong').addEventListener('click', (event) => {
+    event.preventDefault();
+    Swal.fire({
+      title: "Vui lòng đăng nhập để book phòng",
+      showClass: {
+        popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+      },
+      hideClass: {
+        popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+      }
+    });
+  });
+</script>   -->
 
-<!-- thong báo đăng nhập -->
+ <!-- thong báo đăng nhập -->
 
  <!-- jquery library -->
  <script src="js/vendor/jquery-1.11.2.min.js"></script>

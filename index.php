@@ -15,54 +15,30 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             include "./view/choo.php";
             break;
         case 'booking':
-            if (isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
-                if (!isset($_SESSION['name'])) {
-                    echo "<input type ='hidden' value = 'a'>";
-                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>";
-                    echo "<script>
-                            Swal.fire({
-                                title: 'Thông báo',
-                                text: 'VUi lòng đăng nhập để đặt phòng',
-                                confirmButtonText: 'OK'
-                            });
-                          </script>";
-                }
-               
-            }
+            if (!isset($_SESSION['name'])) {
+                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>";
+                echo '<input type="hidden" value="a">';
+                // header('location:index.php');
+                echo "<script>
+                Swal.fire({
+                    title: 'Thông báo',
+                    text: 'Hãy đăng nhập để đặt phòng ',
+                    confirmButtonText: 'ok'
+                });
+                
+              </script>";
+                // header('location:http://localhost/php/du_an_one/dkdn.php?act=dangnhap');
+            } elseif (isset($_SESSION['name']) && isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
                 $phong = load_one_phong($_GET['idphong']);
-            include "./view/booking.php";
+                include "./view/booking.php";
+            }
+
             break;
         case 'xacnhantt':
             $phong = load_one_phong($_GET['idphong']);
             include "./view/datphong.php";
             break;
         case 'datphong':
-            $namekh = $email = "";
-            $error_namekh = $error_email = "";
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (empty($_POST["namekh"])) {
-                    $error_namekh = "<span style='color:red;'>Error: Họ tên bắt buộc phải nhập.</span>";
-                } else {
-                    $namekh = $_POST["namekh"];
-                    if (!preg_match("/^[a-zA-Z ]*$/", $namekh)) {
-                        $error_namekh = "<span style='color:red;'>Error: Họ tên chỉ chấp nhận chữ và khoảng trắng.</span>";
-                    } else {
-                        echo $namekh;
-                    }
-                }
-
-                if (empty($_POST["email"])) {
-                    $error_email = "<span style='color:red;'>Error: Email bắt buộc phải nhập.</span>";
-                } else {
-                    $email = $_POST["email"];
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        $error_email = "<span style='color:red;'>Error: Email nhập chưa đúng.</span>";
-                    } else {
-                        echo $email;
-                    }
-                }
-            }
-
             if (isset($_POST['datphong']) && ($_POST['datphong'])) {
                 $tong = $_SESSION['tong'];
                 $idphong = $_POST['idphong'];
@@ -73,6 +49,7 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 $songuoi = $_POST['songuoi'];
                 $ngaybatdau = $_POST['ngaybatdau'];
                 $ngayketthuc = $_POST['ngayketthuc'];
+
                 dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi);
                 $thongbao = "Đặt phòng thành công!";
                 $phong = load_one_phong($_POST['idphong']);
@@ -179,6 +156,11 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             }
             include "view/listCartOrder.php";
             break;
+        case 'lichsudat':
+            // $tk = loadtk_đh($_GET['nameuser']);
+            $lichsu = load_lichsu();
+            include 'view/lichsudat.php';
+            break;
         case "success":
             if (isset($_SESSION['success'])) {
                 include 'view/success.php';
@@ -189,7 +171,6 @@ if (isset($_GET['act']) && ($_GET['act'])) {
         case "order":
             if (isset($_SESSION['cart'])) {
                 $cart = $_SESSION['cart'];
-                // print_r($cart);
                 if (isset($_POST['order_confirm'])) {
                     $txthoten = $_POST['txthoten'];
                     $txttel = $_POST['txttel'];
@@ -283,12 +264,10 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 }
             }
 
-
             break;
         default:
             include "./view/header.php";
             include "./view/home.php";
-
             include "./view/footer.php";
     }
 } else {
