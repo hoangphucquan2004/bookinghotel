@@ -111,44 +111,8 @@
                                         </li>
                                     </ul>
 
-                                </div><!-- /
-                                    <ul class="nav navbar-nav">
-                                        <li role="presentation" class="dropdown">
-                                            <a id="drop-one" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                                Trang chủ
-                                            </a>
-                                        </li>
-                                        <li><a href="index.php?act=choo">Chỗ ở</a></li>
-
-                                        <li role="presentation" class="dropdown">
-                                            <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                                Đặc trưng
-                                            </a>
-                                            <ul id="menu2" class="dropdown-menu" role="menu">
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="about-us.html">About US</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="booking.html">Booking</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="room-details.html">Room Details</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="staff.html">Our Staff</a></li>
-                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="404.html">404 Page</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog.html">Tin tức</a></li>
-
-                                        <li role="presentation" class="dropdown">
-                                            <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
-
-                                        </li>
-
-
-                                        <li role="presentation" class="dropdown">
-
-                                            <span id="totalProduct"><?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>
-                                        </li>
-                                    </ul>
-                            </nav>
-                        </div>
-                    </div>
-                    <!-- end mainmenu and logo -->
+                                </div>
+                                <!-- end mainmenu and logo -->
                         </div>
                     </div>
                     <!-- end main header -->
@@ -328,7 +292,7 @@
 
                                                                     <div class="col-lg-12 col-md-12">
                                                                         <div class="booking_next_btn padding-top-30 margin-top-20 clearfix border-top-whitesmoke">
-                                                                            <a href="index.php?act=xacnhantt&idphong=<?= $phong['id'] ?>&tong=<?= $tong ?>" class="btn btn-warning btn-sm floatright">Đặt Phòng Ngay</a>
+                                                                            <a href="index.php?act=xacnhantt&idphong=<?= $phong['id'] ?>&tong=<?= $tong ?>" class="btn btn-warning btn-sm floatright">Đặt Phòng Ngay                   .</a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -340,8 +304,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                                 <script>
                                     $(document).ready(function() {
@@ -350,15 +312,11 @@
                                         });
                                     });
                                 </script>
-
                                 <div class="row" id="binhluan">
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 

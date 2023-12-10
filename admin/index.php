@@ -116,6 +116,10 @@ if (isset($_GET['act'])) {
             $listnguoidung = loadall_nguoidung("", 0);
             include "./taikhoan/list.php";
             break;
+        case 'datphong':
+            $loaddatphong_admin = loadall_phongdat_admin();
+            include './datphong/list.php';
+            break;
         case 'dstk':
             $listtk = loadall_thongke();
             include "thongke/list.php";

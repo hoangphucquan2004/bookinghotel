@@ -63,4 +63,11 @@ function load_lichsu($iduser) {
    $lichsu = pdo_query($sql);
    return $lichsu;
 }
+function loadall_phongdat_admin() {
+    $sql = "SELECT phong.id,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc,nguoidung.name,nguoidung.email  FROM phong 
+    inner join datphong on phong.id = datphong.idPhong 
+    join nguoidung on nguoidung.id = datphong.iduser order by datphong.id desc;";
+    $lichsu = pdo_query($sql);
+    return $lichsu;
+ }
 ?>

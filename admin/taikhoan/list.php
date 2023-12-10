@@ -1,8 +1,4 @@
-
 <div class="page-wrapper">
-    <!-- ============================================================== -->
-    <!-- Bread crumb and right sidebar toggle -->
-    <!-- ============================================================== -->
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
@@ -12,7 +8,7 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid ">
+    <div class="container-fluid">
     <div class="row">
     <div class="row formtitle">
     </div>
@@ -20,33 +16,35 @@
         <div class="row mb10 formdsloai">
             <table>
                 <tr>
-                    <th></th>
                     <th>MÃ TÀI KHOẢN</th>
                     <th>TÊN ĐĂNG NHẬP</th>
                     <th>MẬT KHẨU</th>
                     <th>EMAIL</th>
-
                     <th>ĐIỆN THOẠI</th>
                     <th>VAI TRÒ</th>
+                    <th>HÀNH ĐỘNG</th>
                 </tr>
                 <?php
                 foreach ($listnguoidung as $nguoidung) {
                     extract($nguoidung);
+                    if($role ==1 ){
+                        $role = "Admin";
+                    }
+                    else $role =  "Khách hàng";
                     $suakh = "index.php?act=suakh&id=" . $id;
                     $xoakh = "index.php?act=xoakh&id=" . $id;
                     echo '   <tr>
-                                <td><input type="checkbox" name="" id=""></td>
                                 <td>' . $id . '</td>
                                 <td>' . $name . '</td>
                                 <td>' . $pass . '</td>
                                 <td>' . $email . '</td>
-                             
                                 <td>' . $sdt . '</td>
                                 <td>' . $role . '</td>
                                 <td> 
                                   <a href="' . $xoakh . '"><input type="button" name="" value="Xóa"></a> 
                                 </td>';
                 }
+              
                 ?>
 
             </table>
