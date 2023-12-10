@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,17 +89,29 @@
                                     </button>
                                     <div class="site_logo fix">
                                         <a id="brand" class="clearfix navbar-brand" href="index.php"><img src="img/site-logo.png" alt="Trips"></a>
-                                        <!-- <div class="header_login floatleft">
-                                          <ul>
-                                              <li><a href="#">Login</a></li>
-                                              <li><a href="#">Register</a></li>
-</ul>
-                                      </div>   -->
                                     </div>
                                 </div>
-
+                                <?php
+                                if (isset($_SESSION['name'])) {
+                                    $link_user = "index.php?act=lichsudat&nameuser=" . $_SESSION['name']['name'];
+                                }
+                                ?>
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                                    <ul class="nav navbar-nav">
+                                        <li><a href="index.php">Trang chủ</a></li>
+                                        <li><a href="index.php?act=choo">Chỗ ở</a></li>
+                                        <li><a href="<?= $link_user ?>">Lịch sử đặt</a></li>
+                                        <li><a href="blog.html">Tin tức</a></li>
+                                        <li role="presentation" class="dropdown">
+                                            <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
+                                        </li>
+                                        <li role="presentation" class="dropdown">
+                                            <span id="totalProduct"><?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>
+                                        </li>
+                                    </ul>
+
+                                </div><!-- /
                                     <ul class="nav navbar-nav">
                                         <li role="presentation" class="dropdown">
                                             <a id="drop-one" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
@@ -138,9 +149,9 @@
                         </div>
                     </div>
                     <!-- end mainmenu and logo -->
-                </div>
-            </div>
-            <!-- end main header -->
+                        </div>
+                    </div>
+                    <!-- end main header -->
 
         </header>
         <!-- end header -->
@@ -330,6 +341,19 @@
                                     </div>
                                 </div>
 
+
+                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                                <script>
+                                    $(document).ready(function() {
+                                        $("#binhluan").load("view/binhluan/binhluanform.php", {
+                                            idPhong: <?= $id ?>
+                                        });
+                                    });
+                                </script>
+
+                                <div class="row" id="binhluan">
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -484,7 +508,9 @@
         <!--[if lte IE 8]>
             <script type="text/javascript" src="js/ie-opacity-polyfill.js"></script>
         <![endif]-->
-
+        <script src="
+        https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.all.min.js
+        "></script>
 
 
         <!-- my js -->
@@ -522,3 +548,45 @@
         });
     }
 </script>
+
+<?php
+
+if (!isset($_SESSION['name'])) {
+
+?>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    </head>
+
+    <body>
+        <?php
+        echo '<script>
+            Swal.fire({
+                title: "Bạn chưa đăng nhập",
+                text: "Vui lòng đăng nhập mới có thể đặt phòng",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Đăng nhập!",
+                cancelButtonText: "Cancel"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect to dkdn.php?act=dangnhap when "Đăng nhập" is clicked
+                    window.location.href = "dkdn.php?act=dangnhap";
+                } else {
+                    // Redirect to index.php when "Cancel" is clicked
+                    window.location.href = "index.php";
+                }
+            });
+        </script>';
+        ?>
+    </body>
+
+    </html>
+<?php
+}
+?>

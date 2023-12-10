@@ -1,6 +1,4 @@
-<?php
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,31 +9,41 @@
     <link rel="stylesheet" href="./view/css/giohang.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
+<style>
+    img{
+        width: 220px;
+        height: 120px;
+    }
+</style>
 <body>
-    <h1>Lịch sử đặt</h1>
-
+<?php
+      if (isset($_SESSION['name'])) {
+        extract($_SESSION['name']);
+      }
+?>
+<h1>Phòng đặt của <?=$name?></h1>
     <table border="1" width="100%" style="margin: 0 auto;">
         <thead>
             <tr align="center">
+                
                 <td>Tên phòng</td>
                 <td>Ảnh</td>
                 <td>Giá</td>
-                <td>Ngày bắt đầu</td>
-                <td>Ngày kết thúc</td>
+                <td>Ngày nhận phòng</td>
+                <td>Ngày trả phòng</td>
                 <td>Hành động</td>
             </tr>
         </thead>
         <?php 
         if (isset($_SESSION['name'])) {
-            
-            foreach ($lichsu as $ls) {
-                // var_dump($ls);
+            foreach ($lichsu as $key =>$ls) {
+                $so = 1;
                 extract($ls);
                 $hinh = $img_path . $img;
                 echo '
                 <tbody id="order">
                 <tr align="center">
+                 
                     <td> '.$ls['name'].' </td>
                     <td> <img src="'. $hinh.'" alt=""></td>
                     <td>'.$ls['giaPhong'].'</td>
@@ -56,18 +64,12 @@
                 </tr> -->
             </tbody>
                 ';
-
             }
+            
         } 
-        
         ?>
-     
     </table>
     <br>
-    <form action="index.php?act=order" method="post">
-        <input type="submit" class="dh" style="padding:10px;" name="order" value="Đặt Hàng">
-    </form>
-
 </body>
 
 </html>

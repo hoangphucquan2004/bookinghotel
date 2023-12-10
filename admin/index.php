@@ -3,6 +3,8 @@ include "../model/taikhoan.php";
 include "../model/pdo.php";
 include "../model/phong.php";
 include "../model/loaiphong.php";
+include "../model/thongke.php";
+include "../model/binhluan.php";
 include "header.php";
 include "aside.php";
 if (isset($_GET['act'])) {
@@ -114,9 +116,21 @@ if (isset($_GET['act'])) {
             $listnguoidung = loadall_nguoidung("", 0);
             include "./taikhoan/list.php";
             break;
-        // default:
-        // include "./home.php";
-        // break;
+        case 'dstk':
+            $listtk = loadall_thongke();
+            include "thongke/list.php";
+            break;
+        case 'bieudo':
+            $listtk = loadall_thongke();
+            include "thongke/bieudo.php";
+            break;
+            // default:
+            // include "./home.php";
+            // break;
+            case 'dsbl':                 
+                $listbinhluan=loadall_binhluan(0); 
+                include "./binhluan/list.php";
+                break;
     }
 }
 // } else {
@@ -125,6 +139,3 @@ if (isset($_GET['act'])) {
 
 include "home.php";
 include "footer.php";
-
-
-?>

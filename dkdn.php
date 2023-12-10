@@ -32,6 +32,20 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
             }
             include "view/taikhoan/dangnhap.php";
             break;
+            case 'quenmk':
+                if(isset($_POST['guiemail'])&&($_POST['guiemail'])){
+                       $email=$_POST['email'];
+                       
+                       $checkemail=checkemail($email);
+                       if(is_array($checkemail)){
+                           $thongbao="Mật khẩu của bạn là: ".$checkemail['pass'];
+                       }else{
+                           $thongbao="Email này không tồn tại";
+                        }
+                   }
+                   
+                    include "view/taikhoan/quenmk.php";
+                   break;        
         default:
                 include "view/home.php";
                 break;

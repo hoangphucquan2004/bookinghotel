@@ -74,7 +74,7 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <div class="site_logo fix">
-                                    <a id="brand" class="clearfix navbar-brand border-right-whitesmoke" href="index.php"><img src="img/logoncq.jpg" alt="Trips" width="70px" height="70px"></a>
+                                    <a id="brand" class="clearfix navbar-brand border-right-whitesmoke" href="index.php"><img src="img/site-logo.png" alt="Trips"></a>
                                     <div class="header_login floatleft">
                                         <ul>
                                             <?php

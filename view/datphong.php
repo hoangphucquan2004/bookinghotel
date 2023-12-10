@@ -179,6 +179,9 @@
                                                         <input type="hidden" name="idphong" class="form-control" value="<?= $phong['id'] ?>">
                                                     </div>
                                                     <div class="input-group">
+                                                        <input type="hidden" name="iduser" class="form-control" value="<?= $_SESSION['name']['id'] ?>">
+                                                    </div>
+                                                    <div class="input-group">
                                                         Họ và Tên<input type="text" name="namekh" class="form-control" value="<?= $_SESSION['name']['name'] ?>" placeholder="Họ và Tên">
                                                     </div>
                                                 </div>

@@ -23,11 +23,11 @@
             <div class="remember">
                <label>
                 <input type="checkbox">Ghi nhớ</label>
-                <a href="#">Quên mật khẩu</a>
             </div>
             <input type="submit" value="Đăng Nhập" name="dangnhap"  >
             
         </form>
+        <li> <a href="dkdn.php?act=quenmk"> Quên mật khẩu</a>
         <h2 class="thongbao">
                             <?php
                                 if(isset($thongbao)&&($thongbao!="")){

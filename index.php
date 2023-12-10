@@ -15,25 +15,14 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             include "./view/choo.php";
             break;
         case 'booking':
-            if (!isset($_SESSION['name'])) {
-                echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>";
-                echo '<input type="hidden" value="a">';
-                // header('location:index.php');
-                echo "<script>
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Hãy đăng nhập để đặt phòng ',
-                    confirmButtonText: 'ok'
-                });
-                
-              </script>";
-                // header('location:http://localhost/php/du_an_one/dkdn.php?act=dangnhap');
-            } elseif (isset($_SESSION['name']) && isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
-                $phong = load_one_phong($_GET['idphong']);
-                include "./view/booking.php";
-            }
 
+            if (isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
+                $phong = load_one_phong($_GET['idphong']);
+            }
+            include "./view/booking.php";
             break;
+
+
         case 'xacnhantt':
             $phong = load_one_phong($_GET['idphong']);
             include "./view/datphong.php";
@@ -41,6 +30,7 @@ if (isset($_GET['act']) && ($_GET['act'])) {
         case 'datphong':
             if (isset($_POST['datphong']) && ($_POST['datphong'])) {
                 $tong = $_SESSION['tong'];
+                $iduser = $_POST['iduser'];
                 $idphong = $_POST['idphong'];
                 $namekh = $_POST['namekh'];
                 $phonenumber = $_POST['phonenumber'];
@@ -49,13 +39,11 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 $songuoi = $_POST['songuoi'];
                 $ngaybatdau = $_POST['ngaybatdau'];
                 $ngayketthuc = $_POST['ngayketthuc'];
-
-                dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi);
+                dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi,$iduser);
                 $thongbao = "Đặt phòng thành công!";
                 $phong = load_one_phong($_POST['idphong']);
                 include "./view/datphong.php";
             }
-
             if (isset($_POST['redirect'])) {
                 $tong = $_SESSION['tong'];
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -118,6 +106,11 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 }
             }
             break;
+        case 'lichsudat':
+            $iduser = $_SESSION['name']['id'];
+            $lichsu = load_lichsu($iduser);
+            include 'view/lichsudat.php';
+            break;
         case 'timphong':
             if (isset($_POST['timphong']) && $_POST['timphong']) {
                 $keyw = $_POST['keyw'];
@@ -158,7 +151,7 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             break;
         case 'lichsudat':
             // $tk = loadtk_đh($_GET['nameuser']);
-            $lichsu = load_lichsu();
+            $lichsu = load_lichsu($iduser);
             include 'view/lichsudat.php';
             break;
         case "success":
@@ -171,11 +164,10 @@ if (isset($_GET['act']) && ($_GET['act'])) {
         case "order":
             if (isset($_SESSION['cart'])) {
                 $cart = $_SESSION['cart'];
-                if (isset($_POST['order_confirm'])) {
+                if (isset($_POST['order_confirm']) && $_POST['order_confirm']) {
                     $txthoten = $_POST['txthoten'];
                     $txttel = $_POST['txttel'];
                     $txtemail = $_POST['txtemail'];
-
                     $pttt = $_POST['pttt'];
                     if (isset($_SESSION['user'])) {
                         $id_user = $_SESSION['user']['id'];
@@ -261,9 +253,23 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                     } else {
                         echo json_encode($returnData);
                     }
+                } else {
+                    $cart = $_SESSION['cart'];
+                    $namekh = $_POST['txthoten'];
+                    $idphong = $_POST['idphong'];
+                    $iduser = $_POST['iduser'];
+                    $txtemail = $_POST['txtemail'];
+                    $txttel = $_POST['txttel'];
+                    $iduser = $_POST['iduser'];
+                    $songuoi = 2;
+                    $ngaybatdau = $_POST['ngaynhanphong'];
+                    $ngayketthuc = $_POST['ngaytraphong'];
+                    $lichsu = load_lichsu($iduser);
+                    dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi, $iduser);
+                    
                 }
+                include 'view/lichsudat.php';
             }
-
             break;
         default:
             include "./view/header.php";

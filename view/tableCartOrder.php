@@ -44,7 +44,11 @@ if (!empty($_SESSION['cart'])) {
                 <?= number_format((int)$product['giaPhong'] * (int)$quantityInCart, 0, ",", ".") ?> <u>đ</u>
             </td>
             <td>
-                <button>Xóa</button>
+                <button class="dh" onclick="removeFormCart(<?= $product['id'] ?>)">Xóa phòng</button>
+                <form action="index.php?act=order" method="post">
+                    <button type="submit" class="dh" name="order" value="Đặt Hàng">Đặt phòng</button>
+                    <!-- <input type="submit" class="dh" style="padding:10px;" name="order" value="Đặt Hàng"> -->
+                </form>
             </td>
         </tr>
     <?php
@@ -56,7 +60,7 @@ if (!empty($_SESSION['cart'])) {
     endforeach;
     ?>
 
-    <tr>
+    <!-- <tr>
         <td colspan="5" align="center">
             <h2>Tổng tiền hàng:</h2>
         </td>
@@ -67,7 +71,7 @@ if (!empty($_SESSION['cart'])) {
                 </span>
             </h2>
         </td>
-    </tr>
+    </tr> -->
 <?php
 }
 ?>

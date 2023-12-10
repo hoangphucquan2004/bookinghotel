@@ -8796,7 +8796,7 @@ Labels
 /*******************
 Preloader
 ********************/
-.preloader {
+/* .preloader {
   width: 100%;
   height: 100%;
   top: 0px;
@@ -8821,7 +8821,7 @@ Preloader
     animation: lds-ripple 1s cubic-bezier(0, 0.1, 0.5, 1) infinite; }
   .lds-ripple .lds-pos:nth-child(2) {
     -webkit-animation-delay: -0.5s;
-    animation-delay: -0.5s; }
+    animation-delay: -0.5s; } */
 
 @-webkit-keyframes lds-ripple {
   0% {

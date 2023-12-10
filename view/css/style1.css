@@ -37,7 +37,7 @@ form {
     transition: transform 0.3 ease-out;
 }
 .input-box:hover {
-   transform: scale(1.1);
+   transform: scale(1.05);
 }
 
 input {
@@ -55,6 +55,7 @@ i {
     right: 10px;
     transform: translateY(-50%);
     color: #888;
+    text-decoration: none;
 }
 
 .btn {

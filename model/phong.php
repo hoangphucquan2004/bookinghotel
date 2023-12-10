@@ -32,8 +32,8 @@ function delete_phong($id){
     pdo_execute($sql);
 }
 //Đặt phòng
-function dat_phong($namekh,$idphong,$ngaybatdau,$ngayketthuc,$songuoi){
-    $sql = "insert into datphong(namekh,idPhong,ngayBatDau,ngayKetThuc,soLuong) values ('$namekh','$idphong','$ngaybatdau','$ngayketthuc','$songuoi')";
+function dat_phong($namekh,$idphong,$ngaybatdau,$ngayketthuc,$songuoi,$iduser){
+    $sql = "insert into datphong(namekh,idPhong,ngayBatDau,ngayKetThuc,soLuong,iduser) values ('$namekh','$idphong','$ngaybatdau','$ngayketthuc','$songuoi','$iduser')";
     pdo_execute($sql);
 }
 //Tìm Phòng
@@ -55,9 +55,11 @@ function loadone_phongCart ($idList) {
     return $sanpham;
 }
 
-function load_lichsu() {
-   $sql = "SELECT phong.name,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc FROM phong inner join datphong on phong.id = datphong.idPhong
---    inner join nguoidung on datphong.iduser=nguoidung.id";
+function load_lichsu($iduser) {
+   $sql = "SELECT phong.name,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc FROM phong 
+   inner join datphong on phong.id = datphong.idPhong 
+   join nguoidung on nguoidung.id = datphong.iduser where datphong.iduser = $iduser order by datphong.id desc;
+";
    $lichsu = pdo_query($sql);
    return $lichsu;
 }
