@@ -15,7 +15,6 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             include "./view/choo.php";
             break;
         case 'booking':
-
             if (isset($_GET['idphong']) && ($_GET['idphong'] > 0)) {
                 $phong = load_one_phong($_GET['idphong']);
             }
@@ -39,19 +38,34 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 $songuoi = $_POST['songuoi'];
                 $ngaybatdau = $_POST['ngaybatdau'];
                 $ngayketthuc = $_POST['ngayketthuc'];
-                dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi,$iduser);
+                dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi, $iduser);
                 $thongbao = "Đặt phòng thành công!";
                 $phong = load_one_phong($_POST['idphong']);
                 include "./view/datphong.php";
             }
             if (isset($_POST['redirect'])) {
+                // $_SESSION['dathanhtoan'] = "Đã thanh toán";
+                $iduser = $_POST['iduser'];
+                $idphong = $_POST['idphong'];
+                $namekh = $_POST['namekh'];
+                $phonenumber = $_POST['phonenumber'];
+                $email = $_POST['email'];
+                $cmt = $_POST['cmt'];
+                $songuoi = $_POST['songuoi'];
+                $ngaybatdau = $_POST['ngaybatdau'];
+                $ngayketthuc = $_POST['ngayketthuc'];
+                dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi, $iduser);
+                $thongbao = "Đặt phòng thành công!";
+                $phong = load_one_phong($_POST['idphong']);
+
+
                 $tong = $_SESSION['tong'];
                 $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                $vnp_Returnurl = "http://localhost/php/du_an_one/index.php";
+                $vnp_Returnurl = "http://localhost/php/du_an_one/view/hoadon.php";
                 $vnp_TmnCode = "CGXZLS0Z"; //Mã website tại VNPAY 
                 $vnp_HashSecret = "XNBCJFAKAZQSGTARRLGCHVZWCIOIGSHN"; //Chuỗi bí mật
                 $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-                $vnp_OrderInfo = 'Noi dung thanh toan';
+                $vnp_OrderInfo = $_SESSION['name']['id'];
                 $vnp_OrderType = 'billpayment';
                 $vnp_Amount = $tong * 100;
                 $vnp_Locale = 'vn';
@@ -70,7 +84,8 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                     "vnp_OrderInfo" => $vnp_OrderInfo,
                     "vnp_OrderType" => $vnp_OrderType,
                     "vnp_ReturnUrl" => $vnp_Returnurl,
-                    "vnp_TxnRef" => $vnp_TxnRef
+                    "vnp_TxnRef" => $vnp_TxnRef,
+                    // "vnp_user" => $vnp_user
                 );
 
                 if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -106,6 +121,8 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 }
             }
             break;
+        case 'hoadon':
+            break;
         case 'lichsudat':
             $iduser = $_SESSION['name']['id'];
             $lichsu = load_lichsu($iduser);
@@ -113,13 +130,14 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             break;
         case 'timphong':
             if (isset($_POST['timphong']) && $_POST['timphong']) {
-                $keyw = $_POST['keyw'];
-                $giaphong = $_POST['giaphong'];
+                $ngayden = $_POST['ngayden'];
+                $ngaydi = $_POST['ngaydi'];
+                // $danhmuc = $_POST['danhmuc'];
             } else {
                 $keyw = "";
                 $giaphong = 0;
             }
-            $listphong = search_phong($keyw, $giaphong);
+            $listphong = search_phong($ngayden, $ngaydi);
             include "./view/timphong.php";
             break;
 
@@ -133,19 +151,11 @@ if (isset($_GET['act']) && ($_GET['act'])) {
             exit();
             break;
         case "listCart":
-            // Kiểm tra xem giỏ hàng có dữ liệu hay không
             if (!empty($_SESSION['cart'])) {
                 $cart = $_SESSION['cart'];
-
-                // Tạo mảng chứa ID các sản phẩm trong giỏ hàng
                 $productId = array_column($cart, 'id');
-
-                // Chuyển đôi mảng id thành một cuỗi để thực hiện truy vấn
                 $idList = implode(',', $productId);
-
-                // Lấy sản phẩm trong bảng sản phẩm theo id
                 $dataDb = loadone_phongCart($idList);
-                // var_dump($dataDb);
             }
             include "view/listCartOrder.php";
             break;
@@ -194,13 +204,26 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                 $txttel = $_POST['txttel'];
                 $txtemail = $_POST['txtemail'];
                 if ($pttt == 2) {
+
+                    $cart = $_SESSION['cart'];
+                    $namekh = $_POST['txthoten'];
+                    $idphong = $_POST['idphong'];
+                    $iduser = $_POST['iduser'];
+                    $txtemail = $_POST['txtemail'];
+                    $txttel = $_POST['txttel'];
+                    $songuoi = 2;
+                    $ngaybatdau = $_POST['ngaynhanphong'];
+                    $ngayketthuc = $_POST['ngaytraphong'];
+                    dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi, $iduser);
+
+
                     $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                    $vnp_Returnurl = "http://localhost/php/du_an_one/index.php";
+                    $vnp_Returnurl = "http://localhost/php/du_an_one/view/hoadon.php";
                     $vnp_TmnCode = "CGXZLS0Z"; //Mã website tại VNPAY 
                     $vnp_HashSecret = "XNBCJFAKAZQSGTARRLGCHVZWCIOIGSHN"; //Chuỗi bí mật
 
                     $vnp_TxnRef = rand(00, 9999); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-                    $vnp_OrderInfo = 'Noi dung thanh toan';
+                    $vnp_OrderInfo = $_SESSION['name']['id'];
                     $vnp_OrderType = 'billpayment';
                     $vnp_Amount = 1000000 * 100;
                     $vnp_Locale = 'vn';
@@ -266,7 +289,6 @@ if (isset($_GET['act']) && ($_GET['act'])) {
                     $ngayketthuc = $_POST['ngaytraphong'];
                     $lichsu = load_lichsu($iduser);
                     dat_phong($namekh, $idphong, $ngaybatdau, $ngayketthuc, $songuoi, $iduser);
-                    
                 }
                 include 'view/lichsudat.php';
             }

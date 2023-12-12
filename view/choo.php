@@ -102,25 +102,10 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-
                                     <li><a href="index.php">Trang chủ</a></li>
                                     <li><a href="index.php?act=choo">Chỗ ở</a></li>
-                                    <li><a href="index.php">Đặc trưng</a></li>
-
-                                    <!-- <li role="presentation" class="dropdown">
-                                <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                    Đặc trưng
-                                </a>
-                                <ul id="menu2" class="dropdown-menu" role="menu">
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="about-us.html">About US</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="booking.html">Booking</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="room-details.html">Room Details</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="staff.html">Our Staff</a></li>
-                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="404.html">404 Page</a></li>
-                                </ul>
-                            </li> -->
+                                    <li><a href="<?= $link_user ?>">Lịch sử đặt</a></li>
                                     <li><a href="blog.html">Tin tức</a></li>
-
                                     <li role="presentation" class="dropdown">
                                         <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
                                     </li>
@@ -129,7 +114,7 @@
                                     </li>
                                 </ul>
 
-                            </div><!-- /.navbar-collapse -->
+                            </div>
                         </nav>
                     </div>
                 </div>

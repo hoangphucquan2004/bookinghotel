@@ -19,22 +19,19 @@
         <div class="form-order">
             <form action="index.php?act=ttonl" method="post">
                 <h2>Thông tin khách hàng</h2>
-          
-                <input type="hidden" name="idphong" value="<?=$_SESSION['id_phong']?>">
-                <input type="hidden" name="iduser" value="<?=$_SESSION['name']['id']?>">
+                <input type="hidden" name="idphong" value="<?= $_SESSION['id_phong'] ?>">
+                <input type="hidden" name="iduser" value="<?= $_SESSION['name']['id'] ?>">
                 <div>Họ và tên<input type="text" name="txthoten" value="<?= $_SESSION['name']['name'] ?>" placeholder="Họ và tên" required></div>
                 <div>Số điện thoại<input type="tel" name="txttel" value="<?= $_SESSION['name']['sdt'] ?>" placeholder="Số điện thoại" required></div>
                 <div>Email<input type="email" name="txtemail" value="<?= $_SESSION['name']['email'] ?>" placeholder="Email" required></div>
                 <div>Ngày nhận phòng <input type="date" name="ngaynhanphong" onchange="validateDate()" required></div>
                 <div>Ngày trả phòng<input type="date" name="ngaytraphong" onchange="validateDate()" required></div>
-                <!-- <div><input type="text" name="txtaddress" id="" placeholder="Địa chỉ" required></div> -->
                 <h3>Phương thức thanh toán</h3>
                 <p><input type="radio" name="pttt" id="" value="1" required> Thanh toán sau</p>
                 <p><input type="radio" name="pttt" id="" value="2" required> Chuyển khoản ngân hàng</p>
                 <input type="submit" onclick="" value="Xác nhận đặt hàng" name="order_confirm">
             </form>
         </div>
-
         <div class="sub-order">
             <h2>Thông tin phòng</h2>
             <table>

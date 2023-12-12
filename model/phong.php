@@ -37,18 +37,24 @@ function dat_phong($namekh,$idphong,$ngaybatdau,$ngayketthuc,$songuoi,$iduser){
     pdo_execute($sql);
 }
 //Tìm Phòng
-function search_phong($keyw,$giaphong){
-    $sql = "SELECT * FROM phong where 1";
-    if($keyw != ""){
-        $sql .= " and name like '%".$keyw."%'";
-    }
-    if($giaphong>0){
-        $sql .= " and giaPhong like '%".$giaphong."%'";
-    }
-    $sql .= " ORDER BY id DESC";
+function search_phong($ngayden,$ngaydi){
+    $sql = "SELECT phong.* FROM phong LEFT JOIN datphong on phong.id = datphong.idPhong 
+    WHERE datphong.idPhong IS NULL 
+    OR ('$ngayden' NOT BETWEEN datphong.ngayBatDau AND datphong.ngayKetThuc AND '$ngaydi' 
+    NOT BETWEEN datphong.ngayBatDau AND datphong.ngayKetThuc);";
+    // if($danhmuc != ""){
+    //     $sql .= " and  where "
+    // }
+    $sql .= " ORDER BY id DESC ";
     $listphong = pdo_query($sql);
     return $listphong;
 }
+// function search_danhmuc($id){
+//     $sql = "SELECT phong.* FROM phong left join loaiphong on phong.idLoaiPhong = loaiphong.id where loaiphong.id = $id";
+//     $listphong1 = pdo_query($sql);
+//     return $listphong1;
+// }
+
 function loadone_phongCart ($idList) {
     $sql = 'SELECT * FROM phong WHERE id IN ('. $idList . ')';
     $sanpham = pdo_query($sql);
@@ -56,7 +62,7 @@ function loadone_phongCart ($idList) {
 }
 
 function load_lichsu($iduser) {
-   $sql = "SELECT phong.name,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc FROM phong 
+   $sql = "SELECT phong.name,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc, datphong.trangthai FROM phong 
    inner join datphong on phong.id = datphong.idPhong 
    join nguoidung on nguoidung.id = datphong.iduser where datphong.iduser = $iduser order by datphong.id desc;
 ";
@@ -64,7 +70,7 @@ function load_lichsu($iduser) {
    return $lichsu;
 }
 function loadall_phongdat_admin() {
-    $sql = "SELECT phong.id,phong.giaPhong,phong.img, datphong.ngayBatDau, datphong.ngayKetThuc,nguoidung.name,nguoidung.email  FROM phong 
+    $sql = "SELECT phong.id,phong.giaPhong,phong.img, datphong.trangthai, datphong.ngayBatDau, datphong.ngayKetThuc,nguoidung.name,nguoidung.email  FROM phong 
     inner join datphong on phong.id = datphong.idPhong 
     join nguoidung on nguoidung.id = datphong.iduser order by datphong.id desc;";
     $lichsu = pdo_query($sql);

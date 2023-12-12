@@ -14,6 +14,11 @@ function loadall_binhluan($idPhong)
     $listbl = pdo_query($sql);
     return  $listbl;
 }
+function loadbl_all_admin()  {
+    $sql = "SELECT binhluan.idPhong,binhluan.id, binhluan.noidung, nguoidung.name,binhluan.ngaybinhluan from binhluan join nguoidung on nguoidung.id = binhluan.iduser join phong on binhluan.idPhong = phong.id";
+    $listbinhluan = pdo_query($sql);
+    return $listbinhluan;
+}
 function delete_binhluan($id)
 {
     $sql = "delete from binhluan where id=" . $id;

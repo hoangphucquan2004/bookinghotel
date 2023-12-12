@@ -109,6 +109,9 @@
                                                     </li>
                                                 <?php } ?>
                                                 <li>
+                                                     <?="Hello ".$name?>
+                                                </li>
+                                                <li>
                                                     <a href="index.php?act=thoat">Thoát</a>
                                                 </li>
                                             <?php } else { ?>

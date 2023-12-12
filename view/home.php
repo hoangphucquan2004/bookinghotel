@@ -13,14 +13,14 @@
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-2">
                             <div class="input-group border-bottom-dark-2">
-                                <input class="" id="datepicker" placeholder="Tên phòng" type="text" name="keyw" />
-                                <!-- <div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
+                                <input class="date-picker" id="datepicker" placeholder="Ngày nhận phòng" name="ngayden" type="text" />
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                         <div class="form-group col-lg-2 col-md-2 col-sm-2">
                             <div class="input-group border-bottom-dark-2">
-                                <input class="" id="datepicker1" placeholder="Giá phòng" type="number" name="giaphong" />
-                                <!-- <div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
+                                <input class="date-picker" id="datepicker1" placeholder="Ngày trả phòng" name="ngaydi" type="text" />
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6">

@@ -24,11 +24,15 @@
                             <th>ẢNH PHÒNG</th>
                             <th>NGÀY NHẬN</th>
                             <th>NGÀY TRẢ</th>
-                            <th>HÀNH ĐỘNG</th>
+                            <th>TRẠNG THÁI</th>
                         </tr>
                         <?php
                         foreach ($loaddatphong_admin as $datphong) {
                             extract($datphong);
+                            if($datphong['trangthai'] == 0){
+                                $trangthai = "Đang xử lí";
+                            }
+                            else $trangthai = "Đã thanh toán";
                             $hinh_path = "../upload/".$img;
                             $hinh = "<img src = '".$hinh_path."' width = '100' height = '100'>";
                             // var_dump($datphong);
@@ -42,7 +46,7 @@
                                 <td>' . $hinh. '</td>
                                 <td>' . $ngayBatDau. '</td>
                                 <td>' . $ngayKetThuc. '</td>
-                        
+                                <td>' . $trangthai. '</td>
                             ';
                         }
                             // <td> 

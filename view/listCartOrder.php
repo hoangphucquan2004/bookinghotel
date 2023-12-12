@@ -27,7 +27,7 @@
                     <td>Hình ảnh</td>
                     <td>Tên phòng</td>
                     <td>Giá</td>
-                    <td>Số lượng</td>
+                    <td>Số đêm</td>
                     <td>Tổng giá</td>
                     <td>Hành động</td>
                 </tr>
@@ -53,7 +53,7 @@
                         <td><?= $product['name'] ?></td>
                         <td><?= number_format((int)$product['giaPhong'], 0, ",", ".")  ?> <u>đ</u></td>
                         <td>
-                            <input type="number" value="<?= $quantityInCart ?>" min="1" id="quantity_<?= $product['id'] ?>" oninput="updateQuantity(<?= $product['id'] ?>, <?= $key ?>)">
+                            <input type="number" value="<?= $quantityInCart ?>" min="1" max = "10" id="quantity_<?= $product['id'] ?>" oninput="updateQuantity(<?= $product['id'] ?>, <?= $key ?>)">
                         </td>
                         <td>
                             <?= number_format((int)$product['giaPhong'] * (int)$quantityInCart, 0, ",", ".") ?> <u>đ</u>

@@ -43,14 +43,6 @@
     <!-- responsive -->
     <link rel="stylesheet" href="css/responsive.css" />
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!-- This Template Is Fully Coded By Aftab Zaman from swiftconcept.com -->
-    <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
 </head>
 
 <body id="booking_page">
@@ -82,43 +74,26 @@
                                     <span class="icon-bar"></span>
                                 </button>
                                 <div class="site_logo fix">
-                                    <a id="brand" class="clearfix navbar-brand" href="index.html"><img src="img/site-logo.png" alt="Trips"></a>
+                                    <a id="brand" class="clearfix navbar-brand" href="index.php"><img src="img/site-logo.png" alt="Trips"></a>
                                 </div>
                             </div>
 
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                                 <ul class="nav navbar-nav">
-                                    <!-- <li role="presentation" class="dropdown">
-                                        <a id="drop-one" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                            Home
-                                        </a>
-                                        <ul id="menu1" class="dropdown-menu" role="menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="index-two.html">Home Page two</a></li>
-                                        </ul>
-                                    </li> -->
                                     <li><a href="index.php">Trang chủ</a></li>
                                     <li><a href="index.php?act=choo">Chỗ ở</a></li>
-                                    <li><a href="gallery.html">Đặc trưng</a></li>
-                                    <!-- <li role="presentation" class="dropdown">
-                                        <a id="drop2" href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
-                                            Features
-                                        </a>
-                                        <ul id="menu2" class="dropdown-menu" role="menu">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="about-us.html">About US</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="booking.html">Booking</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="room-details.html">Room Details</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="staff.html">Our Staff</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="404.html">404 Page</a></li>
-                                        </ul>
-                                    </li> -->
-                                    <li><a href="blog.html">tin tức</a></li>
-                                    <li><a href="contact-us.html">liên hệ</a></li>
+                                    <li><a href="<?= $link_user ?>">Lịch sử đặt</a></li>
+                                    <li><a href="blog.html">Tin tức</a></li>
+                                    <li role="presentation" class="dropdown">
+                                        <a class="dropdownbtn" href="index.php?act=listCart">Giỏ hàng</a>
+                                    </li>
+                                    <li role="presentation" class="dropdown">
+                                        <span id="totalProduct"><?= !empty($_SESSION['cart']) ? count($_SESSION['cart']) : 0 ?></span>
+                                    </li>
                                 </ul>
-                                <div class="emergency_number">
-                                    <a href="tel:0365 133 833"><img src="img/call-icon.png" alt="">0365 133 833</a>
-                                </div>
-                            </div><!-- /.navbar-collapse -->
+
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -209,13 +184,11 @@
                                             <div class="row">
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
                                                     <div class="input-group">
-                                                        Ngày nhận phòng<input type="date" id="dateInput" name="ngaybatdau" onchange="validateDate()" class="form-control">
-                                                    </div>
+                                                    Ngày nhận phòng: <input type="date" id="startDate" name="ngaybatdau" min="<?= date('Y-m-d') ?>">                                                    </div>
                                                 </div>
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
                                                     <div class="input-group">
-                                                        Ngày trả phòng<input type="date" id="dateInput" name="ngayketthuc" onchange="validateDate()" class=" form-control">
-                                                    </div>
+                                                    Ngày trả phòng: <input type="date" id="endDate" name="ngayketthuc" min="<?= date('Y-m-d', strtotime('+1 day')) ?>">                                                    </div>
                                                 </div>
                                                 <div class="form-group col-lg-3 col-md-3 col-sm-3 icon_arrow">
                                                 </div>
@@ -235,6 +208,7 @@
                                             if (isset($thongbao)) {
                                                 echo '<h4>' . $thongbao . '</h4>';
                                             }
+                                          
                                             ?>
                                         </form>
                                     </div>
@@ -244,7 +218,6 @@
 
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -358,12 +331,7 @@
     <!-- bootstrap -->
     <script src="js/bootstrap.min.js"></script>
 
-    <!-- uikit -->
-    <!--
-        <script src="js/uikit.min.js"></script>
-        <script src="js/uikit-modal.js"></script>
-        <script src="js/uikit-lightbox.js"></script>
-        -->
+
     <!-- easing -->
     <script src="js/jquery.easing.1.3.min.js"></script>
     <script src="js/datepicker.js"></script>
@@ -380,21 +348,7 @@
     <script type="text/javascript">
         new WOW().init();
     </script>
-    <!--<![endif]-->
-
-    <!--Oh Yes, IE 9+ Supports animation, lets activate for IE 9+-->
-    <!--[if gte IE 9]>
-            <script type="text/javascript">new WOW().init();</script>
-        <![endif]-->
-
-    <!--Opacity & Other IE fix for older browser-->
-    <!--[if lte IE 8]>
-            <script type="text/javascript" src="js/ie-opacity-polyfill.js"></script>
-        <![endif]-->
-
-
-
-    <!-- my js -->
+   
     <script src="js/main.js"></script>
 
 </body>

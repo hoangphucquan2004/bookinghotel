@@ -12,8 +12,7 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
                 $email=$_POST['email'];
                 $pass=$_POST['pass'];
                 insert_nguoidung($name,$sdt,$email,$pass);
-                $thongbao="Đã đăng ký thành công. Vui lòng đăng nhập!"; 
-                header('location:dkdn.php?act=dangnhap');
+              
             }
             include "view/taikhoan/dangky.php";
             break;
@@ -21,14 +20,7 @@ if((isset($_GET['act']))&&($_GET['act']!="")){
             if(isset($_POST['dangnhap'])&&($_POST['dangnhap'])){
                 $name=$_POST['name'];
                 $pass=$_POST['pass'];
-                $checkname=checkname($name,$pass);
-                if(is_array($checkname)){
-                   $_SESSION['name']= $checkname;
-                    header('Location: index.php');
-                    exit();
-                }else{
-                    $thongbao="Tài khoản không tồn tại . Vui lòng kiểm tra lại hoặc đăng ký !";
-                }
+                
             }
             include "view/taikhoan/dangnhap.php";
             break;
